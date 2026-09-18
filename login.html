@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ArtBySani</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container">
+        <a href="index.html" class="logo">ArtBySani</a>
+        <h2>Welcome Back</h2>
+        <p>Log in to manage your custom orders and saved items.</p>
+
+        <div id="errorMsg" class="error-message"></div>
+
+        <form id="loginForm" class="auth-form">
+            <div class="input-group">
+                <label for="loginEmail">Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="auth-btn">LOG IN</button>
+        </form>
+
+        <p class="auth-redirect">Don't have an account? <a href="signup.html">Sign up</a></p>
+        <p class="back-home"><a href="index.html">&larr; Back to Home</a></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputEmail = document.getElementById('loginEmail').value;
+            const inputPass = document.getElementById('loginPassword').value;
+
+            const savedEmail = localStorage.getItem('userEmail');
+            const savedPass = localStorage.getItem('userPassword');
+            const errorDiv = document.getElementById('errorMsg');
+
+            if (!savedEmail || inputEmail !== savedEmail || inputPass !== savedPass) {
+                errorDiv.style.display = 'block';
+                errorDiv.innerText = 'No account found with these credentials. Please sign up first.';
+            } else {
+                localStorage.setItem('isLoggedIn', 'true');
+                alert('Login successful!');
+                window.location.href = 'profile.html';
+            }
+        });
+    </script>
+</body>
+</html>

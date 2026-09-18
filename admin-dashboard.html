@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ArtBySani</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f7f4f1;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: #1f2320;
+        }
+
+        .admin-body {
+            background: #f7f4f1;
+        }
+
+        .admin-header {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(31, 35, 32, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .admin-logo {
+            font-size: 3.1rem;
+            line-height: 1;
+            color: #1f2320;
+        }
+
+        .admin-brand-label {
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #1f2320;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .admin-main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        .admin-section {
+            background: #ffffff;
+            padding: 28px 26px 22px;
+            border-radius: 22px;
+            margin-bottom: 26px;
+            box-shadow: 0 18px 34px rgba(31, 35, 32, 0.08);
+            border: 1px solid rgba(31, 35, 32, 0.06);
+        }
+
+        .admin-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 2.4rem);
+            line-height: 1.1;
+            color: #1f2320;
+            margin: 0 0 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(31, 35, 32, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #1f2320;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid rgba(31, 35, 32, 0.12);
+            border-radius: 12px;
+            background: #fff;
+            color: #1f2320;
+            font-size: 0.96rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: rgba(123, 30, 58, 0.5);
+            box-shadow: 0 0 0 4px rgba(123, 30, 58, 0.08);
+        }
+
+        .checkbox-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.94rem;
+            color: #1f2320;
+            margin-top: 4px;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-row input {
+            width: 18px;
+            height: 18px;
+            accent-color: #7b1e3a;
+        }
+
+        .admin-btn,
+        .logout-btn,
+        .edit-btn,
+        .delete-btn {
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .admin-btn {
+            background: #7b1e3a;
+            color: #fff;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .admin-btn:hover,
+        .logout-btn:hover,
+        .edit-btn:hover,
+        .delete-btn:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.04);
+        }
+
+        .logout-btn {
+            background: #d93d42;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .admin-product-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 14px 0;
+        }
+
+        .product-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .product-meta img {
+            width: 56px;
+            height: 56px;
+            object-fit: cover;
+            border-radius: 10px;
+            background: #f6f1f4;
+        }
+
+        .product-info {
+            min-width: 0;
+        }
+
+        .product-info strong {
+            display: block;
+            font-size: 0.98rem;
+            color: #1f2320;
+        }
+
+        .product-status {
+            display: inline-block;
+            margin-top: 2px;
+            font-size: 0.72rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: #f0e6ea;
+            color: #7b1e3a;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .edit-btn {
+            background: #f4b15a;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .delete-btn {
+            background: #d93d42;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        @media (max-width: 720px) {
+            .admin-header {
+                padding: 16px 20px;
+            }
+
+            .admin-brand {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .admin-brand-label {
+                font-size: 0.7rem;
+            }
+
+            .admin-logo {
+                font-size: 2.5rem;
+            }
+
+            .admin-product-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body class="admin-body">
+
+    <header class="admin-header">
+        <div class="admin-brand">
+            <div class="logo admin-logo">ArtBySani</div>
+            <span class="admin-brand-label">| Admin Dashboard</span>
+        </div>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+    </header>
+
+    <main class="admin-main">
+        <section class="admin-section">
+            <h3>Add New Product</h3>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="prodName">Product Name</label>
+                    <input type="text" id="prodName" placeholder="e.g. Custom Calligraphy Quote" required>
+                </div>
+                <div class="form-group">
+                    <label for="prodPrice">Price (₹)</label>
+                    <input type="number" id="prodPrice" placeholder="e.g. 1200" required>
+                </div>
+                <div class="form-group">
+                    <label for="prodCategory">Product Category</label>
+                    <select id="prodCategory" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="Sale">Sale</option>
+                        <option value="Custom Quotes">Custom Quotes</option>
+                        <option value="Wedding Vows">Wedding Vows</option>
+                        <option value="Bookmarks & Tags">Bookmarks & Tags</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prodImgFile">Upload Image from Device</label>
+                    <input type="file" id="prodImgFile" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="prodDesc">Description</label>
+                    <textarea id="prodDesc" placeholder="Short description of the product..." rows="3" required></textarea>
+                </div>
+                <label class="checkbox-row" for="prodPopular">
+                    <input type="checkbox" id="prodPopular">
+                    <span>Feature in Popular Designs</span>
+                </label>
+                <button type="submit" class="admin-btn">Add Product to Store</button>
+            </form>
+        </section>
+
+        <section class="admin-section">
+            <h3>Manage Current Products</h3>
+            <div id="adminProductList" style="margin-top: 15px;">
+                <p style="color: #666;">No products added yet.</p>
+            </div>
+        </section>
+
+        <section class="admin-section">
+            <h3>Incoming Custom Orders</h3>
+            <div id="customOrdersList" style="margin-top: 15px;">
+                <p style="color: #666;">No custom orders received yet.</p>
+            </div>
+        </section>
+
+        <section class="admin-section">
+            <h3>Cart Orders</h3>
+            <div id="cartOrdersList" style="margin-top: 15px;">
+                <p style="color: #666;">No cart orders yet.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        if (localStorage.getItem('isAdminLoggedIn') !== 'true') {
+            window.location.href = 'admin-login.html';
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('isAdminLoggedIn');
+            window.location.href = 'admin-login.html';
+        });
+
+        function loadAdminProducts() {
+            const productListContainer = document.getElementById('adminProductList');
+            let products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+
+            if (products.length === 0) {
+                productListContainer.innerHTML = '<p style="color: #666;">No products added yet.</p>';
+                return;
+            }
+
+            productListContainer.innerHTML = '';
+            products.forEach((product, index) => {
+                const popularMark = product.popular === true ? '<span class="product-status">Popular</span>' : '';
+                productListContainer.innerHTML += `
+                    <div class="admin-product-row">
+                        <div class="product-meta">
+                            <img src="${product.image}" alt="${product.name}">
+                            <div class="product-info">
+                                <strong>${product.name}</strong>
+                                <span style="color: #7b1e3a; font-weight: 700; display: inline-block; margin-top: 4px;">₹${product.price}</span>
+                                <div style="margin-top: 6px;">
+                                    <span style="font-size: 12px; color: #555; background: #f3f3f3; padding: 4px 8px; border-radius: 999px;">${product.category || 'Uncategorized'}</span>
+                                    ${popularMark}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="action-btns">
+                            <button class="edit-btn" onclick="editProductPrice(${index})">Edit Price</button>
+                            <button class="delete-btn" onclick="deleteProduct(${index})">Delete</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function editProductPrice(index) {
+            let products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+            let currentProduct = products[index];
+            let newPrice = prompt(`Enter new price for "${currentProduct.name}":`, currentProduct.price);
+
+            if (newPrice !== null && newPrice.trim() !== '') {
+                products[index].price = newPrice;
+                localStorage.setItem('adminProducts', JSON.stringify(products));
+                loadAdminProducts();
+                alert('Product price updated successfully!');
+            }
+        }
+
+        function deleteProduct(index) {
+            let products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+            if (confirm('Are you sure you want to delete this product?')) {
+                products.splice(index, 1);
+                localStorage.setItem('adminProducts', JSON.stringify(products));
+                loadAdminProducts();
+            }
+        }
+
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('prodName').value;
+            const price = document.getElementById('prodPrice').value;
+            const category = document.getElementById('prodCategory').value;
+            const description = document.getElementById('prodDesc').value;
+            const popular = document.getElementById('prodPopular').checked;
+            const fileInput = document.getElementById('prodImgFile');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    const imageDataUrl = event.target.result;
+                    const newProduct = {
+                        name,
+                        price,
+                        category,
+                        image: imageDataUrl,
+                        description,
+                        popular: !!popular
+                    };
+
+                    let products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+                    products.push(newProduct);
+                    localStorage.setItem('adminProducts', JSON.stringify(products));
+
+                    alert('Product added successfully!');
+                    document.getElementById('addProductForm').reset();
+                    loadAdminProducts();
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+
+        function loadCartOrders() {
+            const cartOrders = JSON.parse(localStorage.getItem('cartOrders')) || [];
+            const cartOrdersContainer = document.getElementById('cartOrdersList');
+
+            if (cartOrders.length === 0) {
+                cartOrdersContainer.innerHTML = '<p style="color: #666;">No cart orders yet.</p>';
+                return;
+            }
+
+            cartOrdersContainer.innerHTML = '';
+            cartOrders.forEach((order, index) => {
+                const itemList = order.items.map(item => `
+                    <li style="margin: 4px 0; color: #444;">
+                        ${item.name} × ${item.quantity} — ₹${Number(item.price * item.quantity).toLocaleString('en-IN')}
+                    </li>
+                `).join('');
+
+                cartOrdersContainer.innerHTML += `
+                    <div style="border-bottom: 1px solid #eee; padding: 12px 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 8px;">
+                            <strong>#${index + 1}</strong>
+                            <span style="background: #f3e7eb; color: #7b1e3a; padding: 5px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;">${order.channel}</span>
+                        </div>
+                        <ul style="margin: 0 0 8px 18px; padding: 0;">
+                            ${itemList}
+                        </ul>
+                        <div style="font-weight: 700; color: #1f2320; margin-bottom: 6px;">Subtotal: ₹${Number(order.subtotal || 0).toLocaleString('en-IN')}</div>
+                        <small style="color: #888;">Placed on: ${new Date(order.createdAt).toLocaleString()}</small>
+                    </div>
+                `;
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadAdminProducts();
+            loadCartOrders();
+
+            const customOrders = JSON.parse(localStorage.getItem('customOrdersData')) || [];
+            const customOrdersContainer = document.getElementById('customOrdersList');
+
+            if (customOrders.length > 0) {
+                customOrdersContainer.innerHTML = '';
+                customOrders.forEach((order, index) => {
+                    customOrdersContainer.innerHTML += `
+                        <div style="border-bottom: 1px solid #eee; padding: 12px 0;">
+                            <strong>#${index + 1} - ${order.name}</strong> (${order.email})<br>
+                            <p style="margin: 8px 0; color: #444; background: #fafafa; padding: 10px; border-radius: 12px;">${order.description}</p>
+                            <small style="color: #888;">Submitted on: ${order.date}</small>
+                        </div>
+                    `;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

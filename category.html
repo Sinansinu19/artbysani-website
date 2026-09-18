@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category - ArtBySani</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="announcement-bar">Free Shipping on Orders Above ₹1499/-</div>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <button type="button" id="menuToggle" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="index.html#categories-section" class="nav-link">CATEGORIES</a>
+            <a href="#" id="customOrderTrigger" class="nav-link">CUSTOM ORDER</a>
+            <a href="#" id="contactTrigger" class="nav-link">CONTACT</a>
+        </div>
+
+        <div class="logo">ArtBySani</div>
+
+        <div class="nav-right">
+            <a href="#" id="searchTrigger"><i class="fas fa-search"></i> SEARCH</a>
+            <a href="#" id="profileIconLink" class="profile-trigger" aria-expanded="false" aria-haspopup="true"><i class="far fa-user"></i></a>
+            <a href="#" id="cartTrigger" class="cart-link">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cartBadge" class="cart-badge">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div id="profileMenu" class="profile-dropdown" role="menu" aria-label="Account menu">
+        <button type="button" class="profile-option" data-target="login.html">Customer Login</button>
+        <button type="button" class="profile-option" data-target="admin-login.html">Admin Login</button>
+    </div>
+
+    <div id="mobileNav" class="mobile-nav-panel" aria-label="Mobile navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#categories-section">Categories</a>
+        <a href="#" id="mobileCustomOrderTrigger">Custom Order</a>
+        <a href="#" id="mobileContactTrigger">Contact</a>
+    </div>
+
+    <main class="category-page">
+        <div class="page-header">
+            <h1 id="category-title" class="section-heading">Collection</h1>
+            <p>Explore our exclusive collection pieces.</p>
+        </div>
+
+        <div id="product-grid" class="grid"></div>
+    </main>
+
+    <div id="cartOverlay" class="overlay-container">
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <h2>Your Shopping Bag</h2>
+                <span id="closeCart" class="close-btn">&times;</span>
+            </div>
+            <div class="cart-body">
+                <p class="empty-cart-text">Your shopping bag is currently empty.</p>
+            </div>
+            <div class="cart-subtotal">
+                <span>Subtotal</span>
+                <span id="cartSubtotal">₹0</span>
+            </div>
+            <div id="cartNotice" class="cart-notice" aria-live="polite"></div>
+            <div class="cart-footer">
+                <button class="cart-order-btn whatsapp-order-btn" type="button" onclick="orderViaWhatsApp()"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button>
+                <button class="cart-order-btn instagram-order-btn" type="button" onclick="orderViaInstagram()"><i class="fab fa-instagram"></i> Order via Instagram</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchOverlay" class="overlay-container">
+        <div class="overlay-content">
+            <span id="closeSearch" class="close-btn">&times;</span>
+            <h2>Search ArtBySani</h2>
+            <div class="search-box-wrapper">
+                <input type="text" id="searchInput" placeholder="Search for custom calligraphies, art, etc...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="customOrderOverlay" class="overlay-container">
+        <div class="overlay-content" style="max-width: 500px; background: #fff; padding: 30px; border-radius: 8px; position: relative;">
+            <span id="closeCustomOrder" class="close-btn" style="position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer;">&times;</span>
+            <h2>Request a Custom Order</h2>
+            <p style="color: #666; margin-bottom: 20px;">Have a special quote, custom portrait, or handwritten project in mind? Let us bring it to life.</p>
+            <form id="customOrderForm" style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="text" placeholder="Your Name" required style="padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="email" placeholder="Your Email" required style="padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
+                <input type="tel" placeholder="Contact Number" required style="padding: 12px; border: 1px solid #ccc; border-radius: 4px;">
+                <textarea placeholder="Describe your custom design, text, and preferred size..." rows="4" required style="padding: 12px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+                <button type="submit" class="auth-btn" style="padding: 12px; background: #111; color: #fff; border: none; cursor: pointer; border-radius: 4px;">Submit Custom Request</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="contactOverlay" class="overlay-container">
+        <div class="overlay-content contact-modal" style="position: relative; text-align: center;">
+            <span id="closeContact" class="close-btn" style="position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer;">&times;</span>
+            <h2>Get in Touch</h2>
+            <p>Choose how you would like to connect with us:</p>
+            <div class="contact-actions">
+                <a href="https://wa.me/919481319207?text=Hi%20ArtBySani,%20I%20would%20like%20to%20know%20more%20about%20your%20art." target="_blank" class="contact-btn whatsapp-btn"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="https://www.instagram.com/artbysani._?igsh=dHNyanJueHcxb2Vt" target="_blank" class="contact-btn instagram-btn"><i class="fab fa-instagram"></i> Message on Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const categoryName = params.get('cat') || 'Collection';
+            document.getElementById('category-title').textContent = categoryName;
+            document.title = `${categoryName} - ArtBySani`;
+
+            const productGrid = document.getElementById('product-grid');
+            const adminProducts = JSON.parse(localStorage.getItem('adminProducts')) || [];
+            const filtered = adminProducts.filter(product => product.category === categoryName);
+
+            if (filtered.length === 0) {
+                productGrid.innerHTML = `<p style="text-align: center; color: #666; grid-column: 1 / -1; padding: 40px;">No products found in "${categoryName}".</p>`;
+                return;
+            }
+
+            productGrid.innerHTML = '';
+            filtered.forEach(product => {
+                productGrid.innerHTML += `
+                    <div class="card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="card-content">
+                            <h3>${product.name}</h3>
+                            <p class="price">₹${product.price}</p>
+                            <p class="description">${product.description}</p>
+                            <button class="buy-now-btn" onclick="window.buyNow('${product.name}', ${product.price}, '${product.image}')">Buy Now</button>
+                            <button class="buy-btn" onclick="window.addToCart('${product.name}', ${product.price}, '${product.image}')">Add to Bag</button>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - ArtBySani</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Main Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#"><i class="fas fa-bars"></i></a>
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="index.html" class="nav-link">SHOP</a>
+            <a href="index.html" class="nav-link">CATEGORIES</a>
+            <a href="index.html" class="nav-link">CUSTOM ORDER</a>
+            <a href="index.html" class="nav-link">CONTACT</a>
+        </div>
+        
+        <div class="logo">
+            ARTBYSANI
+        </div>
+
+        <div class="nav-right">
+            <a href="#"><i class="fas fa-search"></i> SEARCH</a>
+            <a href="profile.html"><i class="far fa-user"></i></a>
+            <a href="#"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+    </nav>
+
+    <!-- Account Dashboard Section -->
+    <main class="account-container">
+        <h1>Account</h1>
+        <p class="logout-row">
+            <i class="far fa-user"></i> <a href="#" id="logoutBtn">Log out</a>
+        </p>
+
+        <div class="account-grid">
+            <!-- Left Column: Order History -->
+            <div class="order-history-section">
+                <h2>Order history</h2>
+                <p class="no-orders">You haven't placed any orders yet.</p>
+            </div>
+
+            <!-- Right Column: Account Details -->
+            <div class="account-details-section">
+                <h2>Account details</h2>
+                <p id="userEmailDisplay" class="user-email-text"></p>
+                <p>India</p>
+                <a href="#" class="view-address-link">View addresses (1)</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>2026 ArtBySani.</p>
+    </footer>
+
+    <script>
+        // Check if user is logged in
+        const savedEmail = localStorage.getItem('userEmail');
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        
+        if (!savedEmail || isLoggedIn !== 'true') {
+            window.location.href = 'login.html'; // Redirect to login if not authenticated
+        } else {
+            document.getElementById('userEmailDisplay').innerText = savedEmail;
+        }
+
+        // Logout action
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            alert('Logged out successfully.');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

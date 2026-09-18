@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Quotes - ArtBySani</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Apply Times New Roman globally to the entire page */
+        body {
+            background: #fcfbfa;
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        header {
+            background: #111;
+            color: #fff;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .brand-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .page-header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+        .page-header h1 {
+            font-size: 36px;
+            color: #222;
+            margin-bottom: 10px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 20px 5% 60px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .card-content h3, .card-content p {
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .price {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 18px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .buy-btn {
+            background: #d81b60;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px 40px;
+            color: #111;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand-title">ArtBySani</a>
+        <a href="index.html" style="color: #fff; text-decoration: none;">&larr; Back to Home</a>
+    </header>
+
+    <div class="page-header">
+        <h1>Custom Quotes</h1>
+        <p style="color: #666;">Explore our exclusive collection of custom quote art pieces.</p>
+    </div>
+
+    <!-- Filtered Products Grid -->
+    <div id="product-grid"></div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const productGrid = document.getElementById('product-grid');
+            const adminProducts = JSON.parse(localStorage.getItem('adminProducts')) || [];
+
+            // Filter products specifically for "Custom Quotes"
+            const filtered = adminProducts.filter(product => product.category === 'Custom Quotes');
+
+            if (filtered.length === 0) {
+                productGrid.innerHTML = `<p style="text-align: center; color: #666; grid-column: 1 / -1; padding: 40px;">No custom quotes products added yet. Use the admin dashboard to add items under this category!</p>`;
+                return;
+            }
+
+            productGrid.innerHTML = '';
+            filtered.forEach(product => {
+                productGrid.innerHTML += `
+                    <div class="card">
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="card-content">
+                            <h3>${product.name}</h3>
+                            <p class="price">₹${product.price}</p>
+                            <p class="description" style="color: #555; font-size: 14px; margin: 0;">${product.description}</p>
+                            <button class="buy-btn" onclick="alert('Added to bag!')">Add to Bag</button>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>

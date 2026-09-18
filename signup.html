@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - ArtBySani</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container">
+        <a href="index.html" class="logo">ArtBySani</a>
+        <h2>Create Account</h2>
+        <p>Sign up to start saving your favorite custom calligraphies.</p>
+
+        <form id="signupForm" class="auth-form">
+            <div class="input-group">
+                <label for="signupName">Full Name</label>
+                <input type="text" id="signupName" placeholder="Enter your name" required>
+            </div>
+            <div class="input-group">
+                <label for="signupEmail">Email Address</label>
+                <input type="email" id="signupEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" placeholder="Create a password" required>
+            </div>
+            <button type="submit" class="auth-btn">SIGN UP</button>
+        </form>
+
+        <p class="auth-redirect">Already have an account? <a href="login.html">Log in</a></p>
+        <p class="back-home"><a href="index.html">&larr; Back to Home</a></p>
+    </div>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userPassword', password);
+
+            alert('Account created successfully! Please log in.');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>
